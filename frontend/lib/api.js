@@ -1,7 +1,18 @@
 /**
- * API client for communicating with the EduGuard backend with robust fallback & timeout handling.
+ * API client for communicating with the DropGuard backend with robust fallback & timeout handling.
  */
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+function getApiBase() {
+  if (process.env.NEXT_PUBLIC_API_URL && !process.env.NEXT_PUBLIC_API_URL.includes('localhost')) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== 'undefined') {
+    // If accessed from a public domain (like Render), route to deployed backend to avoid Chrome Private Network Access popup
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      return 'https://dropguard-backend.onrender.com';
+    }
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+}
 
 // Fallback Mock Data for standalone / demo / backend-sleep scenarios
 const MOCK_STATS = {
@@ -67,8 +78,11 @@ const MOCK_INTERVENTIONS = [
 
 class ApiClient {
   constructor() {
-    this.baseUrl = API_BASE;
     this.token = null;
+  }
+
+  getBaseUrl() {
+    return getApiBase();
   }
 
   setToken(token) {
@@ -106,7 +120,7 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${this.baseUrl}${endpoint}`;
+    const url = `${this.getBaseUrl()}${endpoint}`;
     const headers = {
       'Content-Type': 'application/json',
       ...options.headers,
