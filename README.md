@@ -1,8 +1,8 @@
 # 🎓 DropGuard — Early-Warning AI System for Student Dropout Prevention
 
 <p align="center">
-  <a href="https://dropguard-project.vercel.app"><img src="https://img.shields.io/badge/🚀_Live_Website-Open_DropGuard_Portal-00f0ff?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Live Website" /></a>
-  <a href="http://127.0.0.1:8000/docs"><img src="https://img.shields.io/badge/⚡_Live_API_Docs-FastAPI_Swagger-00e676?style=for-the-badge&logo=fastapi&logoColor=black" alt="API Docs" /></a>
+  <a href="https://dropguard-frontend.onrender.com"><img src="https://img.shields.io/badge/🚀_Live_Website-Render_Cloud-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Live Website" /></a>
+  <a href="https://dropguard-backend.onrender.com/docs"><img src="https://img.shields.io/badge/⚡_Live_API_Docs-Swagger_UI-00e676?style=for-the-badge&logo=fastapi&logoColor=black" alt="API Docs" /></a>
   <a href="https://github.com/novatrix-2030/SIH-2026"><img src="https://img.shields.io/badge/GitHub-novatrix--2030%2FSIH--2026-8b5cf6?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" /></a>
 </p>
 
@@ -19,12 +19,12 @@
 </p>
 
 > ### 🌐 Quick Links to Launch & Open DropGuard
-> | Service | Link | Description |
-> | :--- | :--- | :--- |
-> | 🚀 **Live Web Portal** | **[Open DropGuard Web App](https://dropguard-project.vercel.app)** | Production web application dashboard |
-> | 💻 **Local Portal (Presentation)** | **[http://localhost:3000](http://localhost:3000)** | Next.js local development portal |
-> | 📖 **Interactive API Docs** | **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)** | Interactive Swagger UI endpoint testing |
-> | 📂 **GitHub Repository** | **[github.com/novatrix-2030/SIH-2026](https://github.com/novatrix-2030/SIH-2026)** | Source code, models, and documentation |
+> | Service | Platform | Link | Description |
+> | :--- | :--- | :--- | :--- |
+> | 🚀 **Live Web Portal** | **Render Cloud** | **[Open DropGuard Web App](https://dropguard-frontend.onrender.com)** | Production Next.js dashboard on Render |
+> | ⚡ **Live API Docs** | **Render Cloud** | **[Open Swagger UI](https://dropguard-backend.onrender.com/docs)** | Interactive FastAPI Swagger documentation |
+> | 💻 **Local Portal (Presentation)** | **Localhost** | **[http://localhost:3000](http://localhost:3000)** | Next.js local development portal |
+> | 📂 **GitHub Repository** | **GitHub** | **[github.com/novatrix-2030/SIH-2026](https://github.com/novatrix-2030/SIH-2026)** | Source code, models, and documentation |
 
 ---
 
@@ -245,9 +245,19 @@ DropGuard directly advances core directives outlined in the **National Education
 
 ## 🌐 Global Deployment Architecture
 
-DropGuard is production-ready for zero-cost cloud deployment:
-- **Frontend:** Hosted on **Vercel** (`frontend/vercel.json` configured)
-- **Backend & ML Engine:** Hosted on **Render** (`render.yaml` blueprint configured)
+DropGuard is configured for automated full-stack cloud deployment on **Render** using the root [`render.yaml`](render.yaml) Infrastructure-as-Code blueprint:
+
+| Service Component | Framework / Runtime | Render Service Type | Live Production URL |
+| :--- | :--- | :--- | :--- |
+| **Frontend Portal** | Next.js 14 / Node 20 | Web Service (`dropguard-frontend`) | [https://dropguard-frontend.onrender.com](https://dropguard-frontend.onrender.com) |
+| **Backend API Engine** | FastAPI / Python 3.11 | Web Service (`dropguard-backend`) | [https://dropguard-backend.onrender.com](https://dropguard-backend.onrender.com) |
+| **Interactive API Docs** | OpenAPI / Swagger UI | Web Service Endpoint | [https://dropguard-backend.onrender.com/docs](https://dropguard-backend.onrender.com/docs) |
+| **ML & XAI Engine** | XGBoost + SHAP TreeExplainer | In-Memory Async Worker | Integrated in Backend Service |
+
+### Deploying via Render Blueprint:
+1. Connect the GitHub repository **`novatrix-2030/SIH-2026`** in your [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** → **Blueprint** and select `render.yaml`.
+3. Render automatically provisions, builds, and deploys both the frontend and backend with continuous integration on every `git push`.
 
 ---
 
