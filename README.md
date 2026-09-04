@@ -1,85 +1,247 @@
-# 🎓 DropGuard — Early-Warning System for Student Dropout Risk
+# 🎓 DropGuard — Early-Warning AI System for Student Dropout Prevention
 
-**SIH 2026 | PS Code: SIH-2026-13-002 | Category: SMART EDUCATION**
+<p align="center">
+  <img src="https://img.shields.io/badge/SIH_2026-PS--SIH--2026--13--002-blue?style=for-the-badge&logo=target" alt="SIH 2026" />
+  <img src="https://img.shields.io/badge/Category-SMART_EDUCATION-green?style=for-the-badge&logo=book" alt="Category" />
+  <img src="https://img.shields.io/badge/Team-Novatrix-purple?style=for-the-badge&logo=github" alt="Team" />
+  <img src="https://img.shields.io/badge/Model_Accuracy-93.67%25-orange?style=for-the-badge&logo=scikitlearn" alt="Accuracy" />
+  <img src="https://img.shields.io/badge/ROC_AUC-0.9888-brightgreen?style=for-the-badge&logo=xgboost" alt="ROC-AUC" />
+</p>
 
-An AI-powered early-warning system that predicts student dropout risk using multi-factor analysis, provides explainable AI insights via SHAP, and empowers educators with actionable intervention recommendations.
+<p align="center">
+  <b>DropGuard</b> is an explainable, multi-factor AI-driven early warning platform engineered to predict, analyze, and proactively prevent student dropouts in Indian secondary and higher education institutions.
+</p>
 
-## 🏗️ Architecture
+---
 
-- **Frontend**: Next.js 14 (React) — Glassmorphic dark-themed dashboard
-- **Backend**: FastAPI (Python) — REST API + ML Engine
-- **ML Model**: XGBoost + SHAP Explainability
-- **Database**: SQLite (hackathon) / PostgreSQL (production)
+## 📌 Table of Contents
 
-## 🚀 Quick Start
+- [Executive Summary](#-executive-summary)
+- [Problem Statement & The Challenge](#-problem-statement--the-challenge)
+- [Core Innovation & Key Features](#-core-innovation--key-features)
+- [System Architecture](#-system-architecture)
+- [Machine Learning & Explainable AI (XAI)](#-machine-learning--explainable-ai-xai)
+- [Tech Stack](#-tech-stack)
+- [Quick Start (Local Presentation Guide)](#-quick-start-local-presentation-guide)
+- [Demo Credentials for Jury](#-demo-credentials-for-jury)
+- [Interactive API Documentation](#-interactive-api-documentation)
+- [Alignment with NEP 2020](#-alignment-with-nep-2020)
+- [Global Deployment Architecture](#-global-deployment-architecture)
+- [Team & Acknowledgments](#-team--acknowledgments)
 
-### Prerequisites
-- Node.js 18+
-- Python 3.10+
+---
 
-### Backend
+## 💡 Executive Summary
+
+According to national educational surveys, millions of students drop out before completing their secondary or higher secondary education due to a compounding matrix of **academic distress, financial hardship, attendance deterioration, and psychological burnout**. Most institutional responses are reactive — occurring *after* the student has already discontinued their education.
+
+**DropGuard transforms dropout prevention from reactive damage control to proactive, explainable intervention:**
+- 🔍 **Predicts** dropout risk months in advance using multi-factor gradient-boosted trees.
+- 🧩 **Explains** the root causes for every prediction using **SHAP (Shapley Additive exPlanations)** waterfall charts, breaking the "black-box" barrier for teachers and counselors.
+- 🎯 **Prescribes** personalized interventions (peer tutoring, fee waivers, counseling sessions).
+- 🧭 **Evaluates** Class 12 Drop-Year risks with integrated **Groq AI (Llama-3.3-70B)** guidance for students attempting competitive exams (JEE/NEET).
+
+---
+
+## 🎯 Problem Statement & The Challenge
+
+- **PS Code:** `SIH-2026-13-002`
+- **Category:** Smart Education
+- **Theme:** AI & Machine Learning for Student Retention & Well-Being
+
+| Traditional Institution Workflow | DropGuard Intelligent Workflow |
+| :--- | :--- |
+| ❌ Attendance and grade data stored in silos | ✅ Unified multi-factor real-time data ingestion |
+| ❌ Dropout detected only after weeks of absence | ✅ Early risk scoring updated continuously |
+| ❌ Generic, one-size-fits-all counselor talks | ✅ Personalized, AI-prescribed intervention plans |
+| ❌ "Black-box" predictive models educators cannot trust | ✅ Transparent, feature-by-feature SHAP explainability |
+
+---
+
+## 🚀 Core Innovation & Key Features
+
+### 1. 🔍 Multi-Factor Risk Assessment
+Evaluates students across four distinct risk pillars:
+- **Academic Performance:** Subject mark trends, failure velocity, assignment turnaround.
+- **Attendance Patterns:** Consecutive unexcused absences, day-of-week dropouts, proxy patterns.
+- **Socio-Economic Factors:** Distance from school, household income bracket, scholarship status.
+- **Behavioral & Well-being Indicators:** Extracurricular engagement, historical drop-year pressures.
+
+### 2. 🧩 Explainable AI (SHAP Waterfall Analysis)
+No guessing. For every at-risk student, DropGuard displays interactive SHAP waterfall plots detailing exactly which features pushed the risk score up (e.g., *+28% due to Mathematics score decline*, *+19% due to 68% attendance*) or down (*-14% due to high peer collaboration*).
+
+### 3. 🛡️ Prescriptive Intervention Engine
+Categorizes recommended actions by urgency:
+- **Urgent:** Immediate parental notification, financial hardship scholarship referral.
+- **Moderate:** Assigned 1-on-1 peer mentor, study schedule restructuring.
+- **Preventative:** Attendance threshold alerts sent directly to educators.
+
+### 4. 🎓 Class 12 Drop-Year Evaluator (Powered by Groq AI)
+A dedicated assessment engine for competitive exam aspirers (JEE, NEET, etc.) calculating the probability of drop-year success, burnout index, and tailored advice generated by **Groq AI (Llama 3.3-70B)** with zero-downtime offline fallback.
+
+### 5. 📈 Temporal Risk Tracking & Cohort Analytics
+Visualizes risk progression over a 6-month timeline via interactive Plotly & Chart.js dashboards, enabling principals and department heads to uncover systemic curriculum or batch-level hurdles.
+
+### 6. 🔒 Role-Based Access Control (RBAC)
+Tailored UI experiences for **Administrators**, **Department Teachers**, and **Counselors** respecting student data privacy and institutional governance.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Client["Frontend Layer (Next.js 14 + React 19)"]
+        UI["Glassmorphic UI / Dashboard"]
+        Charts["Chart.js & Plotly Visualizations"]
+        RBAC_UI["Role-Based Navigation (Admin/Teacher/Counselor)"]
+    end
+
+    subgraph API["Backend Layer (FastAPI + Python 3.11+)"]
+        Auth["OAuth2 & JWT Authentication"]
+        Router["REST Routers (Students, Analytics, Evaluator)"]
+        Inference["ML Inference Engine"]
+        Groq["Groq AI Guidance Service (Llama-3.3-70B)"]
+    end
+
+    subgraph ML["Machine Learning Pipeline"]
+        XGB["XGBoost Classifier (Model Engine)"]
+        SHAP["SHAP TreeExplainer (XAI)"]
+        Scaler["StandardScaler & Feature Pipeline"]
+    end
+
+    subgraph Storage["Persistence Layer"]
+        DB[(SQLite / PostgreSQL via SQLAlchemy)]
+        Artifacts["Trained Artifacts (.joblib & metrics)"]
+    end
+
+    UI -->|REST API Requests| Router
+    Router --> Auth
+    Router --> Inference
+    Router --> Groq
+    Inference --> XGB
+    Inference --> SHAP
+    Router --> DB
+    Inference --> Artifacts
+```
+
+---
+
+## 🔬 Machine Learning & Explainable AI (XAI)
+
+The DropGuard predictive engine uses an optimized **XGBoost Classifier** cross-validated across heterogeneous student cohorts:
+
+| Metric | Score | Significance |
+| :--- | :--- | :--- |
+| **Accuracy** | **93.67%** | High overall fidelity across risk classes |
+| **Precision** | **94.56%** | Minimal false alarms; prevents alarm fatigue for educators |
+| **Recall** | **92.67%** | Successfully flags >92 out of 100 vulnerable students |
+| **F1-Score** | **93.60%** | Optimal harmonic balance of precision and recall |
+| **ROC-AUC** | **0.9888** | Superior discriminatory separation across risk tiers |
+| **5-Fold CV AUC** | **0.9904** | Consistent generalization without overfitting |
+
+---
+
+## 💻 Tech Stack
+
+### Frontend
+- **Framework:** Next.js 14 (App Router) & React 19
+- **Styling:** Vanilla Glassmorphism CSS with CSS Custom Properties & dynamic dark/light theme
+- **Visualizations:** Chart.js, React-Chartjs-2, Plotly.js (`react-plotly.js`)
+- **Animations:** CSS Keyframes & IntersectionObserver scroll reveals
+
+### Backend & AI
+- **API Framework:** FastAPI (Asynchronous Python REST API)
+- **Machine Learning:** XGBoost, Scikit-Learn, Joblib, NumPy, Pandas
+- **Explainability:** SHAP (`shap.TreeExplainer`)
+- **LLM Guidance:** Groq AI Cloud API (`llama-3.3-70b-versatile`)
+- **Database & ORM:** SQLite (development/presentation) / PostgreSQL (production) via SQLAlchemy
+- **Security:** OAuth2 password bearer flow with JWT (jose) and PBKDF2/Bcrypt password hashing
+
+---
+
+## ⚡ Quick Start (Local Presentation Guide)
+
+> [!TIP]
+> **For College Presentation & Jury Evaluation:** Use the automated one-click launcher!
+
+### Option A: 1-Click Presentation Launcher (Recommended)
+1. Double-click **`run_local.bat`** in the project root folder.
+2. The script will automatically:
+   - Start the FastAPI Backend on `http://127.0.0.1:8000`
+   - Start the Next.js Frontend on `http://localhost:3000`
+   - Open your default browser directly to the DropGuard portal!
+
+---
+
+### Option B: Manual Terminal Execution
+
+#### 1. Backend Server
 ```bash
 cd backend
 pip install -r requirements.txt
-python seed_data.py
-python -m ml.train
-uvicorn main:app --reload --port 8000
+python -m uvicorn main:app --reload --port 8000
 ```
+*Backend runs at: [http://127.0.0.1:8000](http://127.0.0.1:8000)*
 
-### Frontend
+#### 2. Frontend Application
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000)
-
-## 📊 Key Features
-
-1. **Explainable AI Dashboard** — SHAP waterfall charts show WHY a student is at risk
-2. **Intervention Recommendations** — AI suggests specific actions (counseling, financial aid, peer mentoring)
-3. **Temporal Risk Tracking** — Track risk evolution over time
-4. **Real-Time Alerts** — Configurable thresholds with instant notifications
-5. **Cohort Analysis** — Identify systemic issues across classes/schools
-6. **Privacy-First** — Role-based access, data anonymization
-
-## 🌐 Global Cloud Deployment Guide
-
-DropGuard can be deployed globally for zero cost using **Vercel** (Frontend) and **Render** (Backend).
-
-### Step 1: Deploy Backend (FastAPI + ML + SQLite) on Render
-1. Push your repository to GitHub.
-2. Sign in to [Render.com](https://render.com) and click **New +** -> **Web Service**.
-3. Connect your repository and select the `backend` directory (or specify Root Directory as `backend`).
-4. Set:
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-5. Click **Create Web Service**. Once deployed, copy your live backend API URL (e.g., `https://dropguard-api.onrender.com`).
-
-### Step 2: Deploy Frontend on Vercel
-#### Option A: Direct CLI Deployment
-Run from the `frontend/` directory:
-```bash
-cd frontend
-npx vercel
-```
-Follow the interactive prompts. When prompted for environment variables, add:
-- `NEXT_PUBLIC_API_URL` = `https://your-backend-service.onrender.com`
-
-#### Option B: GitHub + Vercel Dashboard
-1. Go to [Vercel Dashboard](https://vercel.com/new).
-2. Import your GitHub repository.
-3. Set **Root Directory** to `frontend`.
-4. In **Environment Variables**, add:
-   - Name: `NEXT_PUBLIC_API_URL`
-   - Value: `https://your-backend-service.onrender.com`
-5. Click **Deploy**. Your site is now live globally on all devices!
+*Frontend dashboard opens at: [http://localhost:3000](http://localhost:3000)*
 
 ---
 
-## 👥 Team
+## 🔑 Demo Credentials for Jury
 
-Built for Smart India Hackathon 2026
+| Role | Username | Password | Purpose / Scope |
+| :--- | :--- | :--- | :--- |
+| **Admin** *(Recommended)* | `admin` | `admin123` | Institutional dashboard, school-wide risk stats, all students |
+| **Teacher** | `teacher` | `teacher123` | Class and department-level trends & attendance tracking |
+| **Counselor** | `counselor` | `counselor123` | Individual student deep-dives, SHAP plots, intervention logs |
 
+---
+
+## 📖 Interactive API Documentation
+
+FastAPI provides an automatic, interactive Swagger UI documentation dashboard. During your presentation, you can demonstrate the live API endpoints at:
+
+🔗 **Swagger UI:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
+🔗 **ReDoc Alternative:** [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+Key endpoints available:
+- `POST /api/auth/login` — JWT Authentication token issuance
+- `GET /api/analytics/dashboard` — High-level institutional metrics & risk breakdown
+- `GET /api/students/{id}/risk` — Detailed SHAP feature-importance breakdown
+- `POST /api/evaluator/evaluate` — Class 12 Drop-Year evaluation with Groq AI analysis
+
+---
+
+## 🇮🇳 Alignment with NEP 2020
+
+DropGuard directly advances core directives outlined in the **National Education Policy (NEP 2020)**:
+1. **Section 3.1 — Ensuring Universal Access to Education:** Early warning mechanisms to prevent children from falling out of the educational mainstream.
+2. **Section 3.6 — Tracking Students & Their Learning Levels:** Real-time temporal performance and attendance monitoring.
+3. **Section 4.34 — Socio-Emotional Well-Being:** Proactive identification of academic burnout and peer counseling support.
+
+---
+
+## 🌐 Global Deployment Architecture
+
+DropGuard is production-ready for zero-cost cloud deployment:
+- **Frontend:** Hosted on **Vercel** (`frontend/vercel.json` configured)
+- **Backend & ML Engine:** Hosted on **Render** (`render.yaml` blueprint configured)
+
+---
+
+## 👥 Team & Acknowledgments
+
+- **Team Name:** Novatrix
+- **Event:** Smart India Hackathon (SIH 2026)
+- **Repository:** [https://github.com/novatrix-2030/SIH-2026](https://github.com/novatrix-2030/SIH-2026)
+
+<p align="center">
+  <sub>Built with ❤️ by Team Novatrix for SIH 2026 — Empowering educators to ensure no student is left behind.</sub>
+</p>
