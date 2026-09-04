@@ -1,6 +1,12 @@
 # 🎓 DropGuard — Early-Warning AI System for Student Dropout Prevention
 
 <p align="center">
+  <a href="https://dropguard-project.vercel.app"><img src="https://img.shields.io/badge/🚀_Live_Website-Open_DropGuard_Portal-00f0ff?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Live Website" /></a>
+  <a href="http://127.0.0.1:8000/docs"><img src="https://img.shields.io/badge/⚡_Live_API_Docs-FastAPI_Swagger-00e676?style=for-the-badge&logo=fastapi&logoColor=black" alt="API Docs" /></a>
+  <a href="https://github.com/novatrix-2030/SIH-2026"><img src="https://img.shields.io/badge/GitHub-novatrix--2030%2FSIH--2026-8b5cf6?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" /></a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/SIH_2026-PS--SIH--2026--13--002-blue?style=for-the-badge&logo=target" alt="SIH 2026" />
   <img src="https://img.shields.io/badge/Category-SMART_EDUCATION-green?style=for-the-badge&logo=book" alt="Category" />
   <img src="https://img.shields.io/badge/Team-Novatrix-purple?style=for-the-badge&logo=github" alt="Team" />
@@ -12,10 +18,19 @@
   <b>DropGuard</b> is an explainable, multi-factor AI-driven early warning platform engineered to predict, analyze, and proactively prevent student dropouts in Indian secondary and higher education institutions.
 </p>
 
+> ### 🌐 Quick Links to Launch & Open DropGuard
+> | Service | Link | Description |
+> | :--- | :--- | :--- |
+> | 🚀 **Live Web Portal** | **[Open DropGuard Web App](https://dropguard-project.vercel.app)** | Production web application dashboard |
+> | 💻 **Local Portal (Presentation)** | **[http://localhost:3000](http://localhost:3000)** | Next.js local development portal |
+> | 📖 **Interactive API Docs** | **[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)** | Interactive Swagger UI endpoint testing |
+> | 📂 **GitHub Repository** | **[github.com/novatrix-2030/SIH-2026](https://github.com/novatrix-2030/SIH-2026)** | Source code, models, and documentation |
+
 ---
 
 ## 📌 Table of Contents
 
+- [Live Website & Quick Links](#-quick-links-to-launch--open-dropguard)
 - [Executive Summary](#-executive-summary)
 - [Problem Statement & The Challenge](#-problem-statement--the-challenge)
 - [Core Innovation & Key Features](#-core-innovation--key-features)

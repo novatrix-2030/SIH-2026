@@ -16,6 +16,7 @@ const icons = {
   chevronLeft: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>,
   chevronRight: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>,
   evaluator: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+  github: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>,
 };
 
 const navItems = [
@@ -90,6 +91,24 @@ export default function Sidebar({ collapsed: externalCollapsed, onToggle }) {
               </Link>
             );
           })}
+
+          {/* GitHub Repo link */}
+          <a
+            href="https://github.com/novatrix-2030/SIH-2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sidebar__link"
+            title={isCollapsed ? 'GitHub Repository' : undefined}
+            style={{ marginTop: 'auto', borderTop: '1px solid var(--border-subtle)', paddingTop: '12px' }}
+          >
+            <span className="sidebar__link-icon">{icons.github}</span>
+            {!isCollapsed && (
+              <span className="sidebar__link-label" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                <span>GitHub Repo</span>
+                <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>↗</span>
+              </span>
+            )}
+          </a>
         </nav>
 
         {/* Footer controls: Theme Toggle & Collapse */}
