@@ -3,24 +3,25 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
-  theme: 'dark',
+  theme: 'light',
   toggleTheme: () => {},
   setTheme: () => {},
   mounted: false,
 });
 
 export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState('dark');
+  const [theme, setThemeState] = useState('light');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Read theme from localStorage or default to 'dark'
+    // Read theme from localStorage or default to 'light'
     const savedTheme = localStorage.getItem('dropguard-theme');
-    if (savedTheme === 'light' || savedTheme === 'dark') {
-      setThemeState(savedTheme);
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    } else {
+    if (savedTheme === 'dark') {
+      setThemeState('dark');
       document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      setThemeState('light');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
     setMounted(true);
   }, []);
