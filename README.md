@@ -1,7 +1,7 @@
 # 🎓 DropGuard — Early-Warning AI System for Student Dropout Prevention
 
 <p align="center">
-  <a href="https://dropguard-frontend.onrender.com"><img src="https://img.shields.io/badge/🚀_Live_Website-Render_Cloud-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Live Website" /></a>
+  <a href="https://dropguard-app.onrender.com"><img src="https://img.shields.io/badge/🚀_Live_Website-dropguard--app.onrender.com-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Live Website" /></a>
   <a href="https://dropguard-backend.onrender.com/docs"><img src="https://img.shields.io/badge/⚡_Live_API_Docs-Swagger_UI-00e676?style=for-the-badge&logo=fastapi&logoColor=black" alt="API Docs" /></a>
   <a href="https://github.com/novatrix-2030/SIH-2026"><img src="https://img.shields.io/badge/GitHub-novatrix--2030%2FSIH--2026-8b5cf6?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" /></a>
 </p>
@@ -10,6 +10,7 @@
   <img src="https://img.shields.io/badge/SIH_2026-PS--SIH--2026--13--002-blue?style=for-the-badge&logo=target" alt="SIH 2026" />
   <img src="https://img.shields.io/badge/Category-SMART_EDUCATION-green?style=for-the-badge&logo=book" alt="Category" />
   <img src="https://img.shields.io/badge/Team-Novatrix-purple?style=for-the-badge&logo=github" alt="Team" />
+  <img src="https://img.shields.io/badge/Model-LightGBM_%2B_XGBoost-blueviolet?style=for-the-badge&logo=scikitlearn" alt="Model" />
   <img src="https://img.shields.io/badge/Model_Accuracy-93.67%25-orange?style=for-the-badge&logo=scikitlearn" alt="Accuracy" />
   <img src="https://img.shields.io/badge/ROC_AUC-0.9888-brightgreen?style=for-the-badge&logo=xgboost" alt="ROC-AUC" />
 </p>
@@ -120,7 +121,7 @@ flowchart TB
     end
 
     subgraph ML["Machine Learning Pipeline"]
-        XGB["XGBoost Classifier (Model Engine)"]
+        XGB["LightGBM & XGBoost Classifiers (Ensemble Engine)"]
         SHAP["SHAP TreeExplainer (XAI)"]
         Scaler["StandardScaler & Feature Pipeline"]
     end
@@ -144,7 +145,7 @@ flowchart TB
 
 ## 🔬 Machine Learning & Explainable AI (XAI)
 
-The DropGuard predictive engine uses an optimized **XGBoost Classifier** cross-validated across heterogeneous student cohorts:
+The DropGuard predictive engine uses an optimized **LightGBM & XGBoost Ensemble** cross-validated across heterogeneous student cohorts:
 
 | Metric | Score | Significance |
 | :--- | :--- | :--- |
@@ -167,7 +168,7 @@ The DropGuard predictive engine uses an optimized **XGBoost Classifier** cross-v
 
 ### Backend & AI
 - **API Framework:** FastAPI (Asynchronous Python REST API)
-- **Machine Learning:** XGBoost, Scikit-Learn, Joblib, NumPy, Pandas
+- **Machine Learning:** LightGBM, XGBoost, Scikit-Learn, Joblib, NumPy, Pandas
 - **Explainability:** SHAP (`shap.TreeExplainer`)
 - **LLM Guidance:** Groq AI Cloud API (`llama-3.3-70b-versatile`)
 - **Database & ORM:** SQLite (development/presentation) / PostgreSQL (production) via SQLAlchemy
@@ -249,10 +250,10 @@ DropGuard is configured for automated full-stack cloud deployment on **Render** 
 
 | Service Component | Framework / Runtime | Render Service Type | Live Production URL |
 | :--- | :--- | :--- | :--- |
-| **Frontend Portal** | Next.js 14 / Node 20 | Web Service (`dropguard-frontend`) | [https://dropguard-frontend.onrender.com](https://dropguard-frontend.onrender.com) |
+| **Frontend Portal** | Next.js 16 / React 19 | Web Service (`dropguard-frontend`) | [https://dropguard-app.onrender.com](https://dropguard-app.onrender.com) |
 | **Backend API Engine** | FastAPI / Python 3.11 | Web Service (`dropguard-backend`) | [https://dropguard-backend.onrender.com](https://dropguard-backend.onrender.com) |
 | **Interactive API Docs** | OpenAPI / Swagger UI | Web Service Endpoint | [https://dropguard-backend.onrender.com/docs](https://dropguard-backend.onrender.com/docs) |
-| **ML & XAI Engine** | XGBoost + SHAP TreeExplainer | In-Memory Async Worker | Integrated in Backend Service |
+| **ML & XAI Engine** | LightGBM + XGBoost + SHAP | In-Memory Async Worker | Integrated in Backend Service |
 
 ### Deploying via Render Blueprint:
 1. Connect the GitHub repository **`novatrix-2030/SIH-2026`** in your [Render Dashboard](https://dashboard.render.com).
