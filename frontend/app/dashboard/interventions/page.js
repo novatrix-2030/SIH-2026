@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import api from '../../../lib/api';
 
@@ -9,6 +10,7 @@ export default function InterventionsPage() {
   const [statusFilter, setStatusFilter] = useState('');
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
   // New intervention modal state
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -25,8 +27,25 @@ export default function InterventionsPage() {
   const [studentsList, setStudentsList] = useState([]);
 
   useEffect(() => {
+    setMounted(true);
     loadAllInterventions();
   }, []);
+
+  useEffect(() => {
+    if (showCreateModal) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setShowCreateModal(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [showCreateModal]);
 
   async function loadAllInterventions() {
     setLoading(true);
@@ -337,19 +356,38 @@ export default function InterventionsPage() {
         )}
       </div>
 
-      {/* User-Friendly High-Contrast Create Intervention Modal */}
-      {showCreateModal && (
+      {/* User-Friendly High-Contrast Create Intervention Modal via React Portal */}
+      {showCreateModal && mounted && createPortal(
         <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(5, 10, 24, 0.85)',
-          backdropFilter: 'blur(12px)', zIndex: 9999,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(5, 10, 24, 0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          zIndex: 999999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 20,
+          overflowY: 'auto'
         }} onClick={() => setShowCreateModal(false)}>
           <div style={{
-            width: '100%', maxWidth: 560, padding: 'var(--space-7)',
-            background: '#0f172a', borderRadius: '16px',
+            width: '100%',
+            maxWidth: 560,
+            padding: 'var(--space-7)',
+            background: '#0f172a',
+            borderRadius: '16px',
             border: '1px solid rgba(0, 242, 254, 0.4)',
             boxShadow: '0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 242, 254, 0.2)',
-            color: '#ffffff'
+            color: '#ffffff',
+            margin: 'auto',
+            maxHeight: '90vh',
+            overflowY: 'auto'
           }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-5)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)', paddingBottom: 14 }}>
               <div>
@@ -493,7 +531,8 @@ export default function InterventionsPage() {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
