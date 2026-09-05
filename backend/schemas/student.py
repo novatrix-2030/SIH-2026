@@ -5,6 +5,8 @@ from datetime import date
 
 class StudentCreate(BaseModel):
     enrollment_no: str
+    apaar_id: Optional[str] = None
+    udise_code: Optional[str] = "07040100101"
     first_name: str
     last_name: str
     email: Optional[str] = None
@@ -37,6 +39,8 @@ class StudentCreate(BaseModel):
 class StudentResponse(BaseModel):
     id: int
     enrollment_no: str
+    apaar_id: Optional[str] = None
+    udise_code: Optional[str] = None
     first_name: str
     last_name: str
     full_name: str = ""

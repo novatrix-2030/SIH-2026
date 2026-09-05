@@ -21,7 +21,7 @@
 > ### 🌐 Quick Links to Launch & Open DropGuard
 > | Service | Platform | Link | Description |
 > | :--- | :--- | :--- | :--- |
-> | 🚀 **Live Web Portal** | **Render Cloud** | **[Open DropGuard Web App](https://dropguard-frontend.onrender.com)** | Production Next.js dashboard on Render |
+> | 🚀 **Live Web Portal** | **Render Cloud** | **[Open DropGuard Web App](https://dropguard-app.onrender.com)** | Production Next.js dashboard on Render |
 > | ⚡ **Live API Docs** | **Render Cloud** | **[Open Swagger UI](https://dropguard-backend.onrender.com/docs)** | Interactive FastAPI Swagger documentation |
 > | 💻 **Local Portal (Presentation)** | **Localhost** | **[http://localhost:3000](http://localhost:3000)** | Next.js local development portal |
 > | 📂 **GitHub Repository** | **GitHub** | **[github.com/novatrix-2030/SIH-2026](https://github.com/novatrix-2030/SIH-2026)** | Source code, models, and documentation |

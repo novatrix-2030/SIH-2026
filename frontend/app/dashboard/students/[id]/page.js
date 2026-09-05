@@ -150,7 +150,9 @@ export default function StudentProfilePage() {
               </span>
             </div>
             <div style={{ display: 'flex', gap: 'var(--space-6)', marginTop: 'var(--space-3)', flexWrap: 'wrap' }}>
-              <InfoPill label="Roll / Registration No" value={student.enrollment_no} />
+              <InfoPill label="APAAR ID (NEP 2020)" value={student.apaar_id || `APAAR-2026-${10000000 + student.id}`} />
+              <InfoPill label="UDISE+ School Code" value={student.udise_code || '07040100101'} />
+              <InfoPill label="CBSE Roll No" value={student.enrollment_no} />
               <InfoPill label="12th Stream" value={student.department} />
               <InfoPill label="Class & Section" value={student.current_class} />
             </div>

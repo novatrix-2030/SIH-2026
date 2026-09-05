@@ -39,6 +39,8 @@ def compute_student_response(student: Student, db: Session) -> dict:
     return {
         "id": student.id,
         "enrollment_no": student.enrollment_no,
+        "apaar_id": student.apaar_id,
+        "udise_code": student.udise_code,
         "first_name": student.first_name,
         "last_name": student.last_name,
         "full_name": f"{student.first_name} {student.last_name}",
@@ -86,7 +88,9 @@ async def list_students(
         query = query.filter(
             (Student.first_name.ilike(search_term)) |
             (Student.last_name.ilike(search_term)) |
-            (Student.enrollment_no.ilike(search_term))
+            (Student.enrollment_no.ilike(search_term)) |
+            (Student.apaar_id.ilike(search_term)) |
+            (Student.udise_code.ilike(search_term))
         )
     if department:
         query = query.filter(Student.department == department)

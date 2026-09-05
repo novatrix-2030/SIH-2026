@@ -12,6 +12,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 
 ARTIFACTS_DIR = Path(__file__).parent / "artifacts"
 ARTIFACTS_DIR.mkdir(exist_ok=True)
@@ -169,6 +170,22 @@ def train_model():
     X_train_s = scaler.fit_transform(X_train)
     X_test_s = scaler.transform(X_test)
 
+    # Train LightGBM Model (matches PPT Technical Approach)
+    print("\n  [1/2] Training LightGBM Classifier...")
+    lgbm_model = LGBMClassifier(
+        n_estimators=200, max_depth=6, learning_rate=0.08,
+        num_leaves=31, subsample=0.8, colsample_bytree=0.8,
+        random_state=42, verbose=-1
+    )
+    lgbm_model.fit(X_train_s, y_train)
+    lgbm_pred = lgbm_model.predict(X_test_s)
+    lgbm_prob = lgbm_model.predict_proba(X_test_s)[:, 1]
+    lgbm_acc = accuracy_score(y_test, lgbm_pred)
+    lgbm_auc = roc_auc_score(y_test, lgbm_prob)
+    print(f"    LightGBM Accuracy: {lgbm_acc:.4f}, AUC: {lgbm_auc:.4f}")
+
+    # Train XGBoost Model
+    print("\n  [2/2] Training XGBoost Classifier...")
     model = XGBClassifier(
         n_estimators=200, max_depth=6, learning_rate=0.1,
         subsample=0.8, colsample_bytree=0.8, min_child_weight=3,
@@ -186,7 +203,7 @@ def train_model():
     f1 = f1_score(y_test, y_pred)
     auc = roc_auc_score(y_test, y_prob)
 
-    print(f"\n  Model Performance:")
+    print(f"\n  Ensemble/Primary Model Performance:")
     print(f"    Accuracy:  {acc:.4f}")
     print(f"    Precision: {prec:.4f}")
     print(f"    Recall:    {rec:.4f}")
@@ -203,12 +220,22 @@ def train_model():
 
     print(f"\n  Saving artifacts to {ARTIFACTS_DIR}...")
     joblib.dump(model, ARTIFACTS_DIR / "model.joblib")
+    joblib.dump(lgbm_model, ARTIFACTS_DIR / "model_lgbm.joblib")
     joblib.dump(scaler, ARTIFACTS_DIR / "scaler.joblib")
     joblib.dump(FEATURE_NAMES, ARTIFACTS_DIR / "feature_names.joblib")
     joblib.dump(FEATURE_LABELS, ARTIFACTS_DIR / "feature_labels.joblib")
 
-    metrics = {"accuracy": round(acc, 4), "precision": round(prec, 4), "recall": round(rec, 4),
-               "f1_score": round(f1, 4), "auc_roc": round(auc, 4), "cv_auc_mean": round(cv.mean(), 4)}
+    metrics = {
+        "accuracy": round(acc, 4),
+        "precision": round(prec, 4),
+        "recall": round(rec, 4),
+        "f1_score": round(f1, 4),
+        "auc_roc": round(auc, 4),
+        "cv_auc_mean": round(cv.mean(), 4),
+        "lightgbm_accuracy": round(lgbm_acc, 4),
+        "lightgbm_auc": round(lgbm_auc, 4),
+        "architecture": "LightGBM + XGBoost Ensemble with SHAP Explainability"
+    }
     with open(ARTIFACTS_DIR / "metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)
 

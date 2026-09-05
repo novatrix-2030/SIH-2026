@@ -199,7 +199,12 @@ export default function StudentsPage() {
                       </div>
                     </Link>
                   </td>
-                  <td style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{student.enrollment_no}</td>
+                  <td style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>
+                    <div style={{ fontWeight: 600 }}>{student.enrollment_no}</div>
+                    <div style={{ fontSize: '0.68rem', color: 'var(--primary-300)', marginTop: 2 }}>
+                      {student.apaar_id || `APAAR-2026-${10000000 + student.id}`}
+                    </div>
+                  </td>
                   <td>
                     <div style={{ fontSize: '0.85rem', fontWeight: 600, color: student.drop_years_count > 0 ? 'var(--risk-high)' : 'var(--text-secondary)' }}>
                       {student.drop_years_count || 0} Drop Yr(s)

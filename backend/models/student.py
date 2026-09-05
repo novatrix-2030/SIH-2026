@@ -8,6 +8,8 @@ class Student(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     enrollment_no = Column(String(20), unique=True, index=True, nullable=False)
+    apaar_id = Column(String(30), unique=True, index=True, nullable=True)  # Automated Permanent Academic Account Registry (12-digit)
+    udise_code = Column(String(30), default="07040100101")  # UDISE+ School Code
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
     email = Column(String(100))

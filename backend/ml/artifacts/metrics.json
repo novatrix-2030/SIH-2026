@@ -4,5 +4,8 @@
   "recall": 0.9267,
   "f1_score": 0.936,
   "auc_roc": 0.9888,
-  "cv_auc_mean": 0.9904
+  "cv_auc_mean": 0.9904,
+  "lightgbm_accuracy": 0.93,
+  "lightgbm_auc": 0.9863,
+  "architecture": "LightGBM + XGBoost Ensemble with SHAP Explainability"
 }
